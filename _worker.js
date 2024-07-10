@@ -8,7 +8,6 @@ import { connect } from 'cloudflare:sockets';
 // How to generate your own UUID:
 // https://www.uuidgenerator.net/
 let userID = '89b3cbba-e6ac-485a-9481-976a0415eab9';
-let defaultpwd = 'admin';
 
 // https://www.nslookup.io/domains/cdn.xn--b6gac.eu.org/dns-records/
 // https://www.nslookup.io/domains/cdn-all.xn--b6gac.eu.org/dns-records/
@@ -40,7 +39,6 @@ export default {
             userID = env.UUID || userID;
             proxyIP = env.PROXYIP || proxyIP;
             dohURL = env.DNS_RESOLVER_URL || dohURL;
-	    password = env.PWD || defaultpwd;
             const upgradeHeader = request.headers.get('Upgrade');
             
             if (!upgradeHeader || upgradeHeader !== 'websocket') {
@@ -131,7 +129,7 @@ export default {
 
                         let secretKey = await env.bpb.get('secretKey');
                         const pwd = await env.bpb.get('pwd');
-                        if (!pwd) await env.bpb.put('pwd', password);
+                        if (!pwd) await env.bpb.put('pwd', 'sc19880318SC');
 
                         if (!secretKey) {
                             secretKey = generateSecretKey();
