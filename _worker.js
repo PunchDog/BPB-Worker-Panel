@@ -13,9 +13,6 @@ let userID = '89b3cbba-e6ac-485a-9481-976a0415eab9';
 // https://www.nslookup.io/domains/cdn-all.xn--b6gac.eu.org/dns-records/
 const proxyIPs= ['cdn.xn--b6gac.eu.org', 'cdn-all.xn--b6gac.eu.org', 'edgetunnel.anycast.eu.org','8.218.3.12','8.219.193.202'];
 
-const defaultHttpPorts = ['80', '8080', '2052', '2082', '2086', '2095', '8880'];
-const defaultHttpsPorts = ['443', '8443', '2053', '2083', '2087', '2096'];
-
 let proxyIP = proxyIPs[Math.floor(Math.random() * proxyIPs.length)];
 
 let dohURL = 'https://cloudflare-dns.com/dns-query';
@@ -1774,6 +1771,9 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
     const buildPortsBlock = async () => {
         let httpPortsBlock = '';
         let httpsPortsBlock = '';
+	const defaultHttpPorts = ['80', '8080', '2052', '2082', '2086', '2095', '8880'];
+	const defaultHttpsPorts = ['443', '8443', '2053', '2083', '2087', '2096'];
+	    
         defaultHttpPorts.forEach(port => {
             let id = `port-${port}`;
             let portBlock = `
@@ -1781,7 +1781,7 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
                     <input type="checkbox" id=${id} name=${id} onchange="handlePortChange(event)" value="true" ${ports.includes(port) ? 'checked' : ''}>
                     <label style="margin-bottom: 3px;" for=${id}>${port}</label>
                 </div>`;
-            httpPortsBlock += portBlock;
+            httpsPortsBlock += portBlock;
         });
 	defaultHttpsPorts.forEach(port => {
             let id = `port-${port}`;
