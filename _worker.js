@@ -9,6 +9,9 @@ import { connect } from 'cloudflare:sockets';
 // https://www.uuidgenerator.net/
 let userID = '89b3cbba-e6ac-485a-9481-976a0415eab9';
 
+const defaultHttpPorts = ['80', '8080', '2052', '2082', '2086', '2095', '8880'];
+const defaultHttpsPorts = ['443', '8443', '2053', '2083', '2087', '2096'];
+
 // https://www.nslookup.io/domains/cdn.xn--b6gac.eu.org/dns-records/
 // https://www.nslookup.io/domains/cdn-all.xn--b6gac.eu.org/dns-records/
 const proxyIPs= ['cdn.xn--b6gac.eu.org', 'cdn-all.xn--b6gac.eu.org', 'edgetunnel.anycast.eu.org','8.218.3.12','8.219.193.202'];
@@ -1771,8 +1774,6 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
     const buildPortsBlock = async () => {
         let httpPortsBlock = '';
         let httpsPortsBlock = '';
-	const defaultHttpPorts = ['80', '8080', '2052', '2082', '2086', '2095', '8880'];
-	const defaultHttpsPorts = ['443', '8443', '2053', '2083', '2087', '2096'];
 	    
         defaultHttpPorts.forEach(port => {
             let id = `port-${port}`;
