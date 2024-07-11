@@ -1774,14 +1774,23 @@ const renderHomePage = async (env, hostName, fragConfigs) => {
     const buildPortsBlock = async () => {
         let httpPortsBlock = '';
         let httpsPortsBlock = '';
-        [...defaultHttpPorts, ...defaultHttpsPorts].forEach(port => {
+        defaultHttpPorts.forEach(port => {
             let id = `port-${port}`;
             let portBlock = `
                 <div class="routing" style="grid-template-columns: 1fr 2fr; margin-right: 10px;">
                     <input type="checkbox" id=${id} name=${id} onchange="handlePortChange(event)" value="true" ${ports.includes(port) ? 'checked' : ''}>
                     <label style="margin-bottom: 3px;" for=${id}>${port}</label>
                 </div>`;
-            defaultHttpPorts.includes(port) ? httpPortsBlock += portBlock : httpsPortsBlock += portBlock;
+            httpPortsBlock += portBlock;
+        });
+	defaultHttpsPorts.forEach(port => {
+            let id = `port-${port}`;
+            let portBlock = `
+                <div class="routing" style="grid-template-columns: 1fr 2fr; margin-right: 10px;">
+                    <input type="checkbox" id=${id} name=${id} onchange="handlePortChange(event)" value="true" ${ports.includes(port) ? 'checked' : ''}>
+                    <label style="margin-bottom: 3px;" for=${id}>${port}</label>
+                </div>`;
+            httpsPortsBlock += portBlock;
         });
 
         return {httpPortsBlock, httpsPortsBlock};
